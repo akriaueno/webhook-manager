@@ -1,0 +1,36 @@
+name: unit test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+      - name: Install dependency
+        run: npm ci
+      - name: Run unit test with coverage
+        run: npm run test -- --coverage
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: coverage
+      - name: show coverage
+        run: |
+          echo "cov:"
+          cat coverage/coverage-summary.json | jq '.total'
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

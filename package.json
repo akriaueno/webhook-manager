@@ -4,7 +4,9 @@
     "dev": "wrangler dev src/index.ts",
     "deploy": "wrangler deploy --minify src/index.ts",
     "gen-type": "./scripts/generate-types.sh",
-    "test": "vitest"
+    "test": "vitest run",
+    "test:dev": "vitest",
+    "test:cov": "vitest run --coverage"
   },
   "dependencies": {
     "hono": "^4.5.4",
@@ -12,6 +14,7 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240529.0",
+    "@vitest/coverage-v8": "^2.0.5",
     "vitest": "^2.0.5",
     "wrangler": "^3.57.2"
   }
