@@ -9,7 +9,7 @@
     "test:cov": "vitest run --coverage"
   },
   "dependencies": {
-    "hono": "^4.5.4",
+    "hono": "^4.5.8",
     "json-schema-to-typescript": "^15.0.0"
   },
   "devDependencies": {
